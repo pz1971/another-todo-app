@@ -1,0 +1,6 @@
+.strikThrough {
+    text-decoration: line-through;
+}
+.noStrikThrough {
+    text-decoration: none;
+}
