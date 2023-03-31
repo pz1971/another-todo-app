@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useEffect, useReducer } from 'react';
 import Action from '../Models/Action';
 import State from '../Models/State';
 
@@ -7,19 +7,9 @@ export const TodoContext = createContext<{
     dispatch: React.Dispatch<Action>;
 }>({ state: { todos: [] }, dispatch: () => null });
 
+// load from localStorage
 const initialState: State = {
-    todos: [
-        {
-            id: 1,
-            label: 'Learn React',
-            completed: false,
-        },
-        {
-            id: 2,
-            label: 'Learn Typescript',
-            completed: false,
-        },
-    ],
+    todos: JSON.parse(localStorage.getItem('todos') || '[]'),
 };
 
 const reducer = (state: State, action: Action) => {
@@ -54,6 +44,11 @@ interface TodoProviderProps {
 
 export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+        // save to local Storage
+        localStorage.setItem('todos', JSON.stringify(state.todos));
+    }, [state]);
 
     return (
         <TodoContext.Provider value={{ state, dispatch }}>
