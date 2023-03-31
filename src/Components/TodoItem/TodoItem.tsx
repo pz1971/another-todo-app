@@ -13,7 +13,7 @@ export default function TodoItem({
     todo,
     toggleHandler,
     deleteHandler,
-}: TodoItemProps) {
+}: TodoItemProps): JSX.Element {
     const { label, completed } = todo;
     return (
         <ListItem
