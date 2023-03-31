@@ -2,8 +2,9 @@ import { Button, TextField } from '@mui/material';
 import { useContext, useRef } from 'react';
 import { TodoContext } from '../../Contexts/TodoContext';
 import Action from '../../Models/Action';
+import classes from './TodoInput.module.css';
 
-export default function TodoInput() {
+export default function TodoInput(): JSX.Element {
     const { dispatch } = useContext(TodoContext);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,15 +36,20 @@ export default function TodoInput() {
     };
 
     return (
-        <div>
+        <div className={classes.container}>
             <TextField
                 id="standard-basic"
                 label="New Todo"
                 variant="standard"
                 inputRef={inputRef}
+                fullWidth
             />
-            <Button variant="outlined" onClick={onClickHandler}>
-                Add Todo
+            <Button
+                className={classes.addTodoButton}
+                variant="contained"
+                onClick={onClickHandler}
+            >
+                Add
             </Button>
         </div>
     );
