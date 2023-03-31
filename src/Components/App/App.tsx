@@ -1,13 +1,12 @@
-import List from '@mui/material/List';
-import TodoItem from '../TodoItem/TodoItem';
+import { TodoProvider } from '../../Contexts/TodoContext';
+import TodoList from '../TodoList/TodoList';
 import './App.css';
 
 function App(): JSX.Element {
     return (
-        <List>
-            <TodoItem label="123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a123 a" />
-            <TodoItem label="asdf faf efaea" />
-        </List>
+        <TodoProvider>
+            <TodoList />
+        </TodoProvider>
     );
 }
 

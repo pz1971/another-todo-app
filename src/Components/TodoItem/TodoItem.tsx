@@ -1,22 +1,20 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Checkbox, IconButton, ListItem, ListItemButton } from '@mui/material';
-import { useState } from 'react';
+import Todo from '../../Models/Todo';
 import classes from './TodoItem.module.css';
 
-type propType = {
-    label: string;
-    completed?: boolean;
+type TodoItemProps = {
+    todo: Todo;
+    deleteHandler: () => void;
+    toggleHandler: () => void;
 };
 
-export default function TodoItem({ label, completed }: propType) {
-    const [isDone, setIsDone] = useState<boolean>(completed || false);
-
-    const checkBoxChangeHandler = () => {
-        setIsDone(!isDone);
-    };
-
-    const deleteHandler = () => {};
-
+export default function TodoItem({
+    todo,
+    toggleHandler,
+    deleteHandler,
+}: TodoItemProps) {
+    const { label, completed } = todo;
     return (
         <ListItem
             secondaryAction={
@@ -30,11 +28,13 @@ export default function TodoItem({ label, completed }: propType) {
             }
             disablePadding
         >
-            <ListItemButton onClick={checkBoxChangeHandler}>
-                <Checkbox edge="start" checked={isDone} />
+            <ListItemButton onClick={toggleHandler}>
+                <Checkbox edge="start" checked={completed} />
                 <div
                     className={
-                        isDone ? classes.strikThrough : classes.noStrikThrough
+                        completed
+                            ? classes.strikThrough
+                            : classes.noStrikThrough
                     }
                 >
                     {label}
